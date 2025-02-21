@@ -101,12 +101,9 @@
             document.getElementById("popup").style.display = "none";
         }
 
-        function sendToWhatsApp() {
+                function sendToWhatsApp() {
             let phoneNumber = "6285763613402"; // Nomor WhatsApp tujuan
-            let message = `Halo Fariza! 🎉%0A%0A` +
-                          `Aku sudah menjawab pertanyaanmu! 💌%0A%0A` +
-                          `Jawaban: *${selectedAnswer}*%0A%0A` +
-                          `Terima kasih sudah membuat ini! 🥰`;
+            let message =` Ini Jawabannya: *${selectedAnswer}*%0A%0A`;
             
             let waUrl = `https://wa.me/${phoneNumber}?text=${message}`;
             window.open(waUrl, "_blank");
