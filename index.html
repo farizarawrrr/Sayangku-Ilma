@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ilma 🎉</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { overflow: hidden; background: linear-gradient(120deg, #FAD0C4, #FFD1FF); text-align: center; color: #333; height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; transition: opacity 1s ease-in-out; }
+
+        .page { display: none; width: 100%; height: 100vh; align-items: center; justify-content: center; flex-direction: column; }
+        .active { display: flex; animation: fadeIn 1s ease-in-out; }
+
+        h1 { font-size: 45px; margin-bottom: 15px; font-weight: 600; color: #444; }
+        p { font-size: 20px; margin-bottom: 20px; color: #666; }
+
+        button { font-size: 18px; padding: 12px 25px; border: none; cursor: pointer; border-radius: 8px; transition: 0.3s; margin: 10px; }
+        .btn-primary { background: #ff4d6d; color: white; }
+        .btn-primary:hover { background: #e63950; }
+        .btn-secondary { background: #ffcc66; color: black; }
+        .btn-secondary:hover { background: #e6b800; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: black; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); text-align: center; }
+        .popup button { margin-top: 10px; font-size: 16px; }
+
+        .bg-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Halaman 1: Ucapan Selamat Ulang Tahun -->
+    <div class="page active" id="page1">
+        <h1>Happy Birthday!</h1>
+                <h1>Ilma Yunita.</h1>
+        <p>Tepat dihari ini, 22 Feb 2025 Ilma ulang tahun dan Sweet seventeen ya! 🎂🥳</p>
+        <button class="btn-primary" onclick="nextPage(2)">Lanjut ➡️</button>
+    </div>
+
+    <!-- Halaman 2: Kenapa Ilma Spesial -->
+    <div class="page" id="page2">
+        <h1>Fariza mau bilang...</h1>
+        <p>Maaf untuk semua yang aku lakuin ya Sayang🤗💖, Semoga Ilma makin cantik, makin pintar, makin sukses, dan makin sayang sama aku (ngawoor bgt) .</p>
+        <p>Jangan lupain fariza ya klo udh tamat nnti, klo udh sukses, trus kita bareng ya! Kita nyatain kehidupan tenang berdua yg kita impikan sejak kecil! Itu aja dulu ya, Happy birthday, my love! 💕🎈</p>
+                <p>sebenarnya fariza mau bilang sesuatu ni, tapi di slide selanjutnya ya...</p>
+        
+        <button class="btn-primary" onclick="nextPage(3)">Lanjut ➡️</button>
+    </div>
+
+    <!-- Halaman 3: Nembak Ilma -->
+    <div class="page" id="page3">
+        <h1>Ilma suka ga </h1>
+        <h1>ama fariza?</h1>
+        <p>dijawab aja ma, gapapa yang penting</p>
+        <p> jujur ama diri sendiri</p>
+        <button class="btn-primary" onclick="showPopup('Yes')">suka</button>
+        <button class="btn-secondary" onclick="showPopup('No')">ga</button>
+    </div>
+
+    <!-- Pop-up Jawaban -->
+    <div class="popup" id="popup">
+        <h2 id="popup-text"></h2>
+        <button class="btn-primary" onclick="sendToWhatsApp()">Kirim</button>
+        <button class="btn-secondary" onclick="closePopup()">tunggu</button>
+    </div>
+
+    <!-- Lagu -->
+    <audio id="bg-music">
+        <source src="https://example.com/yungkai-blue.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        let selectedAnswer = "";
+        
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(`page${pageNumber}`).classList.add('active');
+
+            // Auto-play musik di halaman ke-2
+            if (pageNumber === 2) {
+                document.getElementById("bg-music").play();
+            }
+        }
+
+        function showPopup(answer) {
+            selectedAnswer = answer;
+            document.getElementById("popup-text").innerText = answer === "Yes" ? "harus jujur ya, Fariza beneran pengen tau bgt ni" : "Emm, jujur ya ama diri sendiri";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function sendToWhatsApp() {
+            let phoneNumber = "6285763613402"; // Nomor WhatsApp tujuan
+            let message = `Halo Fariza! 🎉%0A%0A` +
+                          `Aku sudah menjawab pertanyaanmu! 💌%0A%0A` +
+                          `Jawaban: *${selectedAnswer}*%0A%0A` +
+                          `Terima kasih sudah membuat ini! 🥰`;
+            
+            let waUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(waUrl, "_blank");
+        }
+    </script>
+
+</body>
+</html>
